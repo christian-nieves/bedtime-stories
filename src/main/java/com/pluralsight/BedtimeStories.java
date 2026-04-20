@@ -6,33 +6,22 @@ import java.util.Scanner;
 public class BedtimeStories {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Which story would you like to read?(1-3): ");
-        int storyNumber = scanner.nextInt();
+        System.out.println("Enter the name of the story file: ");
+        String storyName = scanner.nextLine();
+
 
         try {
-            FileReader fileReader1 = new FileReader("goldilocks.txt");
-            BufferedReader bufferedReader1 = new BufferedReader(fileReader1);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(storyName));
+
             String line;
+            int lineNumber = 1;
 
-            FileReader fileReader2 = new FileReader("handsel_and_gretel.txt");
-            BufferedReader bufferedReader2 = new BufferedReader(fileReader2);
-
-            FileReader fileReader3 = new FileReader("mary_had_a_little_lamb.txt");
-            BufferedReader bufferedReader3 = new BufferedReader(fileReader3);
-
-
-
-            String[] stories = new String[3];
-            stories[0] = bufferedReader1.readLine();
-            stories[1] = bufferedReader2.readLine();
-            stories[2] = bufferedReader3.readLine();
-
-
-
-
-            while ((line = stories[storyNumber - 1]) != null) {
-                System.out.println(line);
+            while ((line = bufferedReader.readLine()) != null) {
+                System.out.printf("%d. %s%n", lineNumber, line);
+                lineNumber++;
             }
+            scanner.close();
+            bufferedReader.close();
 
 
         } catch (Exception e) {
